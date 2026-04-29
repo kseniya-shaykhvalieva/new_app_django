@@ -1,0 +1,41 @@
+[
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "Морковь",
+        "description": null,
+        "image": "",
+        "category": 5,
+        "price": 30,
+        "created_at": "2026-04-29T11:53:06.237Z",
+        "updated_at": "2026-04-29T11:53:06.237Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "Яблоко",
+        "description": null,
+        "image": "",
+        "category": 6,
+        "price": 120,
+        "created_at": "2026-04-29T11:53:48.319Z",
+        "updated_at": "2026-04-29T12:39:30.664Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "name": "Груша",
+        "description": null,
+        "image": "",
+        "category": 6,
+        "price": 80,
+        "created_at": "2026-04-29T11:54:15.104Z",
+        "updated_at": "2026-04-29T11:54:15.104Z"
+    }
+}
+]
