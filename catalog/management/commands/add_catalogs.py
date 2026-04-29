@@ -1,25 +1,16 @@
 from django.core.management.base import BaseCommand
 from catalog.models import Product, Category
+from django.core.management import call_command
 
 
 class Command(BaseCommand):
-    help = 'Добавляет тестовые продукты'
+    help = 'Добавляет тестовые продукты из фикстуры'
 
     def handle(self, *args, **kwargs):
         Product.objects.all().delete()
         Category.objects.all().delete()
 
-        category, _ = Category.objects.get_or_create(name='Категория1')
+        call_command('loaddata', 'categories_fixture.json')
+        call_command('loaddata', 'products_fixture.json')
 
-        products = [
-            {'name':'Лук', 'description':'Ядрёный', 'category':category, 'price':50},
-            {'name':'Свекла', 'category':category, 'price':35},
-            {'name': 'Баклажан', 'description': 'Фиолетовый', 'category': category, 'price': 74},
-        ]
-
-        for product_data in products:
-            product, created = Product.objects.get_or_create(**product_data)
-            if created:
-                self.stdout.write(self.style.SUCCESS(f'Продукт {product.name} успешно добавлен'))
-            else:
-                self.stdout.write(self.style.WARNING(f'Продукт {product.name} уже существует'))
+        self.stdout.write(self.style.SUCCESS('Данные из фикстур успешно загружены'))
