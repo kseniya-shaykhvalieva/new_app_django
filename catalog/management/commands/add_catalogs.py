@@ -6,6 +6,9 @@ class Command(BaseCommand):
     help = 'Добавляет тестовые продукты'
 
     def handle(self, *args, **kwargs):
+        Product.objects.all().delete()
+        Category.objects.all().delete()
+
         category, _ = Category.objects.get_or_create(name='Категория1')
 
         products = [
