@@ -9,7 +9,7 @@ def home(request):
 def contacts(request):
     return render(request, 'contacts.html')
 
-def product_info(request, product_id):
+def product_detail(request, product_id):
     product = Product.objects.get(id=product_id)
     context = {"product" : product}
-    return render(request, "product_info.html", context)
+    return render(request, "product_detail.html", context)
