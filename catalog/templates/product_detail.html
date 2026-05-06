@@ -3,14 +3,14 @@
 <div class="container">
     <div class="row text-center">
         <div class="row">
-            <div class="col-3">
+            <div class="col-5">
                 <div class="card mb-4 box-shadow">
                     <div class="card-header">
                         <h3 class="my-0 font-weight-normal">{{ product.name }}</h3>
                     </div>
                     <div class="card">
                         {% if product.image %}
-                        <img src="{{ product.image.url }}" class="card-img-top" alt="Не удалось загрузить изображение">
+                        <img src="{{ product.image.url }}" class="card" alt="Не удалось загрузить изображение">
                         {% else %}
                         <img src="..." class="card-img-top" alt="Изображение отсутствует">
                         {% endif %}
@@ -20,7 +20,8 @@
                         <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                             <li>Описание: {{ product.description }}</li>
                         </ul>
-                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
+                        <a href="{% url 'catalog:home' %}" class="btn btn-outline-secondary w-50">Назад в каталог</a>
+                        <button type="button" class="btn btn-lg btn-block btn-outline-success w-25 ">Купить</button>
                     </div>
                 </div>
             </div>
