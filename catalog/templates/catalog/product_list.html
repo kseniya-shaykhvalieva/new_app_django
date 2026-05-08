@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'catalog/base.html' %}
 {% block content%}
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4">Вас приветствует команда Продукты.ру</h1>
@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row text-center">
         <div class="row">
-            {% for product in products %}
+            {% for product in object_list %}
             <div class="col-3">
                 <div class="card mb-4 box-shadow">
                     <div class="card-header">
