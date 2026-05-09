@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+{% block content%}
+<main>
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col">
+                    <div class="card shadow-sm">
+
+                        {% if blog.preview %}
+                        <img src="{{ blog.preview.url }}" alt="Превью блога"
+                             onerror="this.onerror=null; this.src='/media/default.jpg';">
+                        {% else %}
+                        <span>Изображение отсутствует</span>
+                        {% endif %}
+
+
+                        <div class="card-body"><p class="card-text"> {{ object.content }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Посмотреть</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Редактировать
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Удалить</button>
+                                </div>
+                                <small class="text-body-secondary">{{ object.created_at }}</small></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</main>
+{% endblock %}
