@@ -7,6 +7,10 @@ from blog.models import Blog
 class BlogListView(ListView):
     model = Blog
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(is_published = True)
+
 
 class BlogCreateView(CreateView):
     model = Blog
