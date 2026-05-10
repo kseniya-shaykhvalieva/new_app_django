@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView, UpdateView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 from blog.models import Blog
 
@@ -22,3 +22,9 @@ class BlogUpdateView(UpdateView):
     model = Blog
     fields = ("title", "content", "preview", "is_published")
     success_url = reverse_lazy('blog:blog_list')
+
+
+class BlogDeleteView(DeleteView):
+    model = Blog
+    success_url = reverse_lazy('blog:blog_list')
+
