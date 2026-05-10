@@ -9,7 +9,14 @@
                         {% csrf_token %}
                         {{ form.as_p }}
                     </div>
-                    <button type="submit" class="btn btn-dark">Создать</button>
+                    <a href="{% url 'blog:blog_list' %}" class="btn btn-outline-secondary">Отменить</a>
+                    <button type="submit" class="btn btn-dark">
+                        {% if object %}
+                        Сохранить
+                        {% else %}
+                        Создать
+                        {% endif %}
+                    </button>
                 </div>
             </form>
         </div>
