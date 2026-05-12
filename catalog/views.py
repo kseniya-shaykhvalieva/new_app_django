@@ -1,31 +1,36 @@
-from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, TemplateView, DetailView, CreateView, UpdateView, DeleteView
 
-from django.shortcuts import render
-
-from catalog.forms import ProductForm
 from catalog.models import Product
 
 
-def home(request):
-    products = Product.objects.all()
-    context = {"products" : products}
-    return render(request,'home.html', context)
-
-def contacts(request):
-    return render(request, 'contacts.html')
-
-def product_detail(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    context = {"product" : product}
-    return render(request, "product_detail.html", context)
+class ProductListView(ListView):
+    model = Product
 
 
-def product_create(request):
-    if request.method == "POST":
-        form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect("catalog:home")
-    else:
-        form = ProductForm()
-    return render(request, "product_form.html", {"form": form})
+class ContactsTemplateView(TemplateView):
+    template_name = 'contacts.html'
+
+
+class ProductDetailView(DetailView):
+    model = Product
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    fields = ("name", "description", "image", "category", "price")
+    success_url = reverse_lazy('catalog:home')
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    fields = ("name", "description", "image", "category", "price")
+    success_url = reverse_lazy('catalog:home')
+
+    def get_success_url(self):
+        return reverse('catalog:product_detail', args=[self.kwargs.get('pk')])
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('catalog:home')
