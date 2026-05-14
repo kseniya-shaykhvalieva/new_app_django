@@ -10,6 +10,27 @@ class ProductForm(forms.ModelForm):
         model = Product
         exclude = ("created_at", "updated_at",)
 
+    def __init__(self, *args, **kwargs):
+        super(ProductForm,self).__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs.update({
+            'class':'form-control',
+            'placeholder':'Введите наименование продукта'
+        })
+        self.fields['description'].widget.attrs.update({
+            'class':'form-control',
+            'placeholder':'Укажите основные характеристики продукта'
+        })
+        self.fields['image'].widget.attrs.update({
+            'class':'form-control'
+        })
+        self.fields['category'].widget.attrs.update({
+            'class':'form-control'
+        })
+        self.fields['price'].widget.attrs.update({
+            'class':'form-control',
+            'placeholder':'Введите стоимость продукта'
+        })
+
     def clean(self):
         cleaned_data = super().clean()
         name = cleaned_data.get('name')
