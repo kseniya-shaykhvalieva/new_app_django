@@ -8,7 +8,7 @@ class ProductForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        exclude = ("created_at", "updated_at", "is_published",)
+        exclude = ("created_at", "updated_at", "is_published", "owner")
 
     def __init__(self, *args, **kwargs):
         super(ProductForm,self).__init__(*args, **kwargs)
