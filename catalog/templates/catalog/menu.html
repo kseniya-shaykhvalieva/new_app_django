@@ -4,5 +4,19 @@
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:home' %}">Каталог</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:contacts' %}">Контакты</a>
     </nav>
+    {% if user.is_authenticated %}
     <a href="{% url 'catalog:product_create' %}" class="ms-automs-auto btn btn-primary">Добавить товар</a>
+    {% endif %}
+    <nav class="ms-auto">
+        {% if user.is_authenticated %}
+        <form method="post" action="{% url 'users:logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="ms-automs-auto btn btn-outline-primary">Выход</button>
+        </form>
+        {% else %}
+        <a href="{% url 'users:register' %}" class="ms-automs-auto btn btn-outline-primary">Регистрация</a>
+        <a href="{% url 'users:login' %}" class="ms-automs-auto btn btn-outline-primary">Вход</a>
+        {% endif %}
+    </nav>
+
 </div>
