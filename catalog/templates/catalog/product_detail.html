@@ -21,11 +21,15 @@
                             <li>Описание: {{ object.description }}</li>
                         </ul>
                         <a href="{% url 'catalog:home' %}" class="btn btn-outline-secondary">Назад в каталог</a>
+                        {% if perms.catalog.can_unpublish_product or user == object.owner %}
                         <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-outline-warning">Редактировать</a>
-                        <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-outline-danger">Удалить</a>
+                        <a href="{% url 'catalog:product_delete' product.pk %}"
+                           class="btn btn-outline-danger">Удалить</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}

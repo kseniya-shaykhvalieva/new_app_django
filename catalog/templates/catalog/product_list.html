@@ -23,8 +23,11 @@
                         <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                             <li>Описание: {{ product.description|truncatechars:100 }}</li>
                         </ul>
-                        <a href="{% url 'catalog:product_detail' product.pk %}" class="btn btn-outline-success w-100">Посмотреть</a>
                         {% if user.is_authenticated %}
+                        <a href="{% url 'catalog:product_detail' product.pk %}" class="btn btn-outline-success w-100">Посмотреть</a>
+                        {% endif %}
+
+                        {% if perms.catalog.can_unpublish_product or user == object.owner %}
                         <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-outline-warning w-100">Редактировать</a>
                         <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-outline-danger w-100">Удалить</a>
                         {% endif %}
@@ -34,4 +37,5 @@
             {% endfor %}
         </div>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}
