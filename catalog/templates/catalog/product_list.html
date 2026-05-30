@@ -15,7 +15,7 @@
                         {% if product.image %}
                         <img src="{{ product.image.url }}" class="card-img-top" alt="Не удалось загрузить изображение">
                         {% else %}
-                        <img src="..." class="card-img-top" alt="Изображение отсутствует">
+                        <div class="card-img-top text-center py-5">Изображение отсутствует</div>
                         {% endif %}
                     </div>
                     <div class="card-body">
