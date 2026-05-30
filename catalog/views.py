@@ -6,6 +6,7 @@ from django.views.generic import ListView, TemplateView, DetailView, CreateView,
 from catalog.forms import ProductForm, ProductModeratorForm
 from catalog.mixin import UserIsOwnerMixin
 from catalog.models import Product
+from catalog.services import products_category
 
 
 class ProductListView(ListView):
@@ -53,3 +54,11 @@ class ProductUpdateView(LoginRequiredMixin, UserIsOwnerMixin, UpdateView):
 class ProductDeleteView(LoginRequiredMixin, UserIsOwnerMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:home')
+
+
+class ProductsCategoryView(ListView):
+    model = Product
+    template_name = 'products_category.html'
+
+    def get_queryset(self):
+        return products_category(self.kwargs['pk'])
