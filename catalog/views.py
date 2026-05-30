@@ -6,11 +6,14 @@ from django.views.generic import ListView, TemplateView, DetailView, CreateView,
 from catalog.forms import ProductForm, ProductModeratorForm
 from catalog.mixin import UserIsOwnerMixin
 from catalog.models import Product
-from catalog.services import products_category
+from catalog.services import products_category, get_products_from_cache
 
 
 class ProductListView(ListView):
     model = Product
+
+    def get_queryset(self):
+        return get_products_from_cache()
 
 
 class ContactsTemplateView(TemplateView):
