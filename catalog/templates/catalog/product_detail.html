@@ -1,0 +1,40 @@
+{% extends 'catalog/base.html' %}
+{% block content%}
+<div class="container">
+    <div class="row text-center">
+        <div class="row">
+            <div class="col-5">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header">
+                        <h3 class="my-0 font-weight-normal">{{ object.name }}</h3>
+                    </div>
+                    <div class="card">
+                        {% if object.image %}
+                        <img src="{{ product.image.url }}" class="card" alt="Не удалось загрузить изображение">
+                        {% else %}
+                        <div class="card-img-top text-center py-5">Изображение отсутствует</div>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title pricing-card-title">Цена: {{ object.price }} руб.</h4>
+                        <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                            <li>Описание: {{ object.description }}</li>
+                        </ul>
+                        <a href="{% url 'catalog:home' %}" class="btn btn-outline-secondary">Назад в каталог</a>
+                        {% if perms.catalog.can_unpublish_product or user == object.owner %}
+                        <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-outline-warning">Редактировать</a>
+                        <a href="{% url 'catalog:product_delete' product.pk %}"
+                           class="btn btn-outline-danger">Удалить</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="col-10">
+                    <a href="{% url 'catalog:products_category' object.pk %}" class="btn btn-outline-secondary">Все товары категории {{ object.category }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
